@@ -761,6 +761,7 @@ function typeWriter() {
   const letterSection = document.getElementById('letter');
   const rect = letterSection.getBoundingClientRect();
   if (rect.top < window.innerHeight * 0.8 && ltIdx === 0) {
+    window.removeEventListener('scroll', typeWriter);
     runTypewriter();
   }
 }
@@ -774,7 +775,8 @@ function runTypewriter() {
   }
 }
 
-window.addEventListener('scroll', typeWriter, { once: true });
+window.addEventListener('scroll', typeWriter);
+typeWriter();
 
 // ── INTERACTIVE HEART ────────────────────────────
 let kisses = 0;
