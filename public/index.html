@@ -648,9 +648,7 @@
 
 <!-- Music toggle (visual only) -->
 <div id="music-btn" title="Toggle Music">🎵</div>
-<audio id="love-song" loop preload="auto">
-  <source src="/love.mp3" type="audio/mpeg">
-</audio>
+<audio id="love-song" loop preload="auto" playsinline src="/love.mp3"></audio>
 
 <script>
 // ── CURSOR ──────────────────────────────────────
@@ -818,6 +816,8 @@ musicBtn.addEventListener('click', () => {
   musicBtn.textContent = musicOn ? '🎶' : '🎵';
   musicBtn.style.background = musicOn ? 'rgba(192,71,106,0.5)' : 'rgba(192,71,106,0.2)';
   if (musicOn) {
+    audio.muted = false;
+    audio.volume = 1;
     audio.play().catch(() => {
       musicOn = false;
       musicBtn.textContent = '🎵';
