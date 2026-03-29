@@ -9,7 +9,7 @@ A beautiful, interactive love website built with pure HTML, CSS & JavaScript —
 
 ## 🌐 Live Site
 
-👉 **[View the live site on Koyeb](https://myforever-velqore.koyeb.app)**
+👉 **[View the live site](https://velqore.github.io/MyForever)**
 
 ## ✨ Features
 - 🧭 **Interactive onboarding panel** — 3-step welcome screen to enter your partner's name, choose a theme, and upload photos before the site begins
