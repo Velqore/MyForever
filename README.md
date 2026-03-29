@@ -1,11 +1,7 @@
 # 💕 Forever Yours — Romantic Website
 
-copilot/update-readme-new-features
-
 A beautiful, interactive love website built with Node.js, Express, HTML, CSS & JavaScript.
 A beautiful, interactive love website built with pure HTML, CSS & JavaScript — **live on Koyeb**.
-
-> **Note:** GitHub only shows this repository's source code and README. The actual live website is hosted on Koyeb (see link below).
 
 ## 🌐 Live Site
 
