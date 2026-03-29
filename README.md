@@ -1,6 +1,12 @@
 # 💕 Forever Yours — Romantic Website
 
-A beautiful, interactive love website built with pure HTML, CSS & JavaScript.
+A beautiful, interactive love website built with pure HTML, CSS & JavaScript — **live on Koyeb**.
+
+> **Note:** GitHub only shows this repository's source code and README. The actual live website is hosted on Koyeb (see link below).
+
+## 🌐 Live Site
+
+👉 **[View the live site on Koyeb](https://myforever-velqore.koyeb.app)**
 
 ## ✨ Features
 - 💗 Custom heart cursor with trailing effect
@@ -14,17 +20,14 @@ A beautiful, interactive love website built with pure HTML, CSS & JavaScript.
 - 🎭 Mood grid with shimmer effects
 - 📱 Fully responsive
 
-## 🚀 Deploy on Koyeb (Static Site)
+## 🚀 Hosting
 
-1. Push this repo to GitHub
-2. Go to [koyeb.com](https://www.koyeb.com) → New Service → GitHub
-3. Select your repo
-4. Set **Builder** to `Static`
-5. Set **Output Directory** to `.` (root)
-6. Click Deploy 🎉
+This site is deployed on [Koyeb](https://www.koyeb.com) using the Node.js/Express server in `server.js`, which serves the static files from the `public/` folder.
+
+> **Why not GitHub Pages?** GitHub Pages only serves plain static files and cannot run Node.js. This project uses an Express server, so it needs a platform like Koyeb that supports Node.js.
 
 ## 🎵 Add Music (Optional)
-In `index.html`, find the music toggle section and add:
+In `public/index.html`, find the music toggle section and add:
 ```html
 <audio id="love-song" loop>
   <source src="your-song.mp3" type="audio/mpeg">
