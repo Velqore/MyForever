@@ -1,8 +1,12 @@
 # 💕 Forever Yours — Romantic Website
 
-A beautiful, interactive love website built with pure HTML, CSS & JavaScript.
+A beautiful, interactive love website built with Node.js, Express, HTML, CSS & JavaScript.
 
 ## ✨ Features
+- 🧭 **Interactive onboarding panel** — 3-step welcome screen to enter your partner's name, choose a theme, and upload photos before the site begins
+- 👤 **Dynamic name personalisation** — your partner's name is woven into headings, the kiss counter, floating words, and the footer throughout the whole site
+- 🎨 **Gender-aware theming** — content (emoji accents, section copy, floating words) adapts based on the gender option chosen during onboarding
+- 📸 **Personalised photo gallery** — upload your own photos during onboarding; they appear as a full-width photo strip and are blended into the mood gallery
 - 💗 Custom heart cursor with trailing effect
 - 🌸 Animated falling petals
 - ⭐ Twinkling star canvas background
@@ -10,33 +14,40 @@ A beautiful, interactive love website built with pure HTML, CSS & JavaScript.
 - 🃏 Flip cards — "Reasons I Love You"
 - 💖 Interactive heart with kiss counter & burst animations
 - 📜 Animated timeline of moments
+- 💍 Promises section — five animated promise cards
 - 🌹 Floating love words
-- 🎭 Mood grid with shimmer effects
+- 🎭 Mood gallery with shimmer effects
+- 🎵 Background music player — `love.mp3` is already bundled; click the 🎵 button to play/pause
 - 📱 Fully responsive
 
-## 🚀 Deploy on Koyeb (Static Site)
+## 🚀 Deploy on Koyeb (Node.js)
+
+The site is served by an Express server, so deploy it as a **Node.js** service.
 
 1. Push this repo to GitHub
-2. Go to [koyeb.com](https://www.koyeb.com) → New Service → GitHub
+2. Go to [koyeb.com](https://www.koyeb.com) → **New Service** → **GitHub**
 3. Select your repo
-4. Set **Builder** to `Static`
-5. Set **Output Directory** to `.` (root)
-6. Click Deploy 🎉
+4. Set **Builder** to `Buildpack` (auto-detects Node.js)
+5. Set **Run command** to `node server.js` (or leave blank — the `start` script in `package.json` handles it)
+6. Click **Deploy** 🎉
 
-## 🎵 Add Music (Optional)
-In `index.html`, find the music toggle section and add:
+> **Note:** The server listens on `process.env.PORT` (defaults to `3000`). Koyeb sets this automatically.
+
+## 🎵 Replace the Music
+A bundled `public/love.mp3` is already wired up to the music toggle button.  
+To swap it out, simply replace `public/love.mp3` with your own MP3 file (keep the same filename), or update the `<source>` tag in `index.html`:
 ```html
-<audio id="love-song" loop>
+<audio id="love-song" loop autoplay muted>
   <source src="your-song.mp3" type="audio/mpeg">
 </audio>
 ```
-Then update the JS music toggle to play/pause it.
 
 ## 💝 Personalise
+- **Name & photos** — use the onboarding panel when the site loads; no code changes needed
+- **Gender / theme** — pick Female 🌸, Male ⚡, or Other 🌈 in the onboarding panel to switch the floating-word accents and section copy
 - Replace the timeline dates with your real milestones
-- Edit the card messages with personal memories
-- Change the love letter text to your own words
-- Add a real photo background by replacing the canvas with an `<img>`
+- Edit the flip-card messages with personal memories
+- Change the love letter text (`<span id="typewriter-text">`) to your own words
 
 ---
 *Made with love 💕*
