@@ -1,6 +1,16 @@
 # 💕 Forever Yours — Romantic Website
 
+<<< copilot/update-readme-new-features
 A beautiful, interactive love website built with Node.js, Express, HTML, CSS & JavaScript.
+=======
+A beautiful, interactive love website built with pure HTML, CSS & JavaScript — **live on Koyeb**.
+
+> **Note:** GitHub only shows this repository's source code and README. The actual live website is hosted on Koyeb (see link below).
+
+## 🌐 Live Site
+
+👉 **[View the live site on Koyeb](https://myforever-velqore.koyeb.app)**
+>>> main
 
 ## ✨ Features
 - 🧭 **Interactive onboarding panel** — 3-step welcome screen to enter your partner's name, choose a theme, and upload photos before the site begins
@@ -20,6 +30,7 @@ A beautiful, interactive love website built with Node.js, Express, HTML, CSS & J
 - 🎵 Background music player — `love.mp3` is already bundled; click the 🎵 button to play/pause
 - 📱 Fully responsive
 
+
 ## 🚀 Deploy on Koyeb (Node.js)
 
 The site is served by an Express server, so deploy it as a **Node.js** service.
@@ -36,6 +47,14 @@ The site is served by an Express server, so deploy it as a **Node.js** service.
 ## 🎵 Replace the Music
 A bundled `public/love.mp3` is already wired up to the music toggle button.  
 To swap it out, simply replace `public/love.mp3` with your own MP3 file (keep the same filename), or update the `<source>` tag in `index.html`:
+## 🚀 Hosting
+
+This site is deployed on [Koyeb](https://www.koyeb.com) using the Node.js/Express server in `server.js`, which serves the static files from the `public/` folder.
+
+> **Why not GitHub Pages?** GitHub Pages only serves plain static files and cannot run Node.js. This project uses an Express server, so it needs a platform like Koyeb that supports Node.js.
+
+## 🎵 Add Music (Optional)
+In `public/index.html`, find the music toggle section and add:
 ```html
 <audio id="love-song" loop autoplay muted>
   <source src="your-song.mp3" type="audio/mpeg">
