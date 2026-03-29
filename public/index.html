@@ -375,9 +375,215 @@
       .letter-box { padding: 40px 28px; }
       .cards-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── ONBOARDING PANEL ── */
+    #onboarding {
+      position: fixed; inset: 0; z-index: 10000;
+      background: #0d0508;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #onboarding.ob-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #ob-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .ob-card {
+      position: relative; z-index: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(192,71,106,0.3);
+      border-radius: 28px;
+      padding: 52px 48px 44px;
+      width: min(520px, 92vw);
+      text-align: center;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 80px rgba(192,71,106,0.12), 0 0 160px rgba(107,26,47,0.08);
+    }
+    .ob-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem; color: var(--gold); margin-bottom: 32px;
+    }
+    .ob-steps-indicator {
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 40px;
+    }
+    .ob-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(192,71,106,0.25);
+      border: 1px solid rgba(192,71,106,0.4);
+      transition: all 0.4s;
+    }
+    .ob-dot.ob-active { background: var(--rose); box-shadow: 0 0 10px var(--rose); }
+    .ob-step-line { width: 40px; height: 1px; background: rgba(192,71,106,0.3); }
+    .ob-step { display: none; }
+    .ob-step.ob-active { display: block; animation: fadeUp 0.5s ease; }
+    .ob-step-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+    .ob-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem); font-style: italic;
+      color: var(--cream); margin-bottom: 12px;
+    }
+    .ob-desc {
+      font-size: 1rem; color: rgba(253,246,240,0.55);
+      margin-bottom: 32px; line-height: 1.7;
+    }
+    .ob-input {
+      width: 100%; padding: 16px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(192,71,106,0.35);
+      border-radius: 60px; color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; text-align: center;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      margin-bottom: 28px;
+    }
+    .ob-input:focus { border-color: var(--rose); box-shadow: 0 0 20px rgba(192,71,106,0.2); }
+    .ob-input::placeholder { color: rgba(253,246,240,0.3); }
+    .ob-btn {
+      display: inline-block; padding: 14px 44px;
+      border: 1.5px solid var(--gold); color: var(--gold);
+      background: transparent;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      border-radius: 60px; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: color 0.4s;
+    }
+    .ob-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold); transform: scaleX(0);
+      transform-origin: left; transition: transform 0.4s ease; z-index: -1;
+    }
+    .ob-btn:hover:not(:disabled) { color: #1a0a10; }
+    .ob-btn:hover:not(:disabled)::before { transform: scaleX(1); }
+    .ob-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .ob-gender-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 28px;
+    }
+    .ob-gender-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 20px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(192,71,106,0.25);
+      border-radius: 16px; cursor: pointer; color: var(--blush);
+      font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .ob-gender-btn:hover { border-color: var(--rose); background: rgba(192,71,106,0.08); }
+    .ob-gender-btn.ob-selected {
+      border-color: var(--rose); background: rgba(192,71,106,0.18);
+      box-shadow: 0 0 20px rgba(192,71,106,0.2); color: var(--cream);
+    }
+    .ob-gender-icon { font-size: 1.8rem; }
+    .ob-upload-label {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      padding: 28px; border: 1.5px dashed rgba(192,71,106,0.4);
+      border-radius: 20px; cursor: pointer; margin-bottom: 16px;
+      color: rgba(253,246,240,0.55);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .ob-upload-label:hover { border-color: var(--rose); background: rgba(192,71,106,0.06); }
+    .ob-upload-icon { font-size: 2.2rem; }
+    .ob-photo-preview {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 24px;
+    }
+    .ob-preview-img {
+      width: 68px; height: 68px; object-fit: cover;
+      border-radius: 12px; border: 1.5px solid rgba(192,71,106,0.4);
+      animation: fadeUp 0.3s ease;
+    }
+    /* ── PHOTO STRIP SECTION ── */
+    #photos { padding: 100px 40px; display: none; }
+    .photo-strip {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center; max-width: 960px; margin: 0 auto;
+    }
+    .photo-strip-img {
+      width: calc(33.333% - 12px); max-width: 280px;
+      aspect-ratio: 3/4; object-fit: cover;
+      border-radius: 20px;
+      border: 1px solid rgba(192,71,106,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: none;
+    }
+    .photo-strip-img:hover {
+      transform: scale(1.03) translateY(-4px);
+      box-shadow: 0 20px 60px rgba(192,71,106,0.25);
+    }
+    @media (max-width: 700px) {
+      .ob-gender-grid { grid-template-columns: 1fr 1fr; }
+      .ob-card { padding: 36px 24px 32px; }
+      .photo-strip-img { width: calc(50% - 8px); }
+    }
   </style>
 </head>
 <body>
+
+<!-- ── ONBOARDING PANEL ── -->
+<div id="onboarding">
+  <canvas id="ob-canvas"></canvas>
+  <div class="ob-card">
+    <div class="ob-logo">Forever Yours 💕</div>
+
+    <!-- Step indicators -->
+    <div class="ob-steps-indicator">
+      <span class="ob-dot ob-active" data-step="1"></span>
+      <span class="ob-step-line"></span>
+      <span class="ob-dot" data-step="2"></span>
+      <span class="ob-step-line"></span>
+      <span class="ob-dot" data-step="3"></span>
+    </div>
+
+    <!-- Step 1: Name -->
+    <div class="ob-step ob-active" id="ob-step-1">
+      <span class="ob-step-icon">💌</span>
+      <h2 class="ob-title">Who is this for?</h2>
+      <p class="ob-desc">Enter the name of the person who holds your heart</p>
+      <input type="text" id="ob-name" class="ob-input" placeholder="Their name…" maxlength="30" autocomplete="off" />
+      <button class="ob-btn" id="ob-next-1">Next →</button>
+    </div>
+
+    <!-- Step 2: Gender -->
+    <div class="ob-step" id="ob-step-2">
+      <span class="ob-step-icon">✨</span>
+      <h2 class="ob-title">How do they identify?</h2>
+      <p class="ob-desc">Help us personalise this experience just for them</p>
+      <div class="ob-gender-grid">
+        <button class="ob-gender-btn" data-gender="female">
+          <span class="ob-gender-icon">🌸</span>
+          <span>She / Her</span>
+        </button>
+        <button class="ob-gender-btn" data-gender="male">
+          <span class="ob-gender-icon">⚡</span>
+          <span>He / Him</span>
+        </button>
+        <button class="ob-gender-btn" data-gender="other">
+          <span class="ob-gender-icon">🌈</span>
+          <span>They / Them</span>
+        </button>
+      </div>
+      <button class="ob-btn" id="ob-next-2" disabled>Next →</button>
+    </div>
+
+    <!-- Step 3: Photos -->
+    <div class="ob-step" id="ob-step-3">
+      <span class="ob-step-icon">📸</span>
+      <h2 class="ob-title">Add their photos</h2>
+      <p class="ob-desc">Upload some of your favourite pictures of them (up to 5)</p>
+      <label class="ob-upload-label" for="ob-photos">
+        <span class="ob-upload-icon">🖼️</span>
+        <span id="ob-upload-text">Click to choose photos</span>
+      </label>
+      <input type="file" id="ob-photos" accept="image/*" multiple style="display:none" />
+      <div class="ob-photo-preview" id="ob-photo-preview"></div>
+      <button class="ob-btn" id="ob-enter">Begin Our Story 💕</button>
+    </div>
+  </div>
+</div>
 
 <!-- Cursor -->
 <div id="cursor">💗</div>
@@ -640,6 +846,15 @@
   </div>
 </section>
 
+<!-- Photos Section (populated after onboarding) -->
+<section id="photos">
+  <p class="section-label">My Favourite Pictures of You</p>
+  <h2 class="section-title" id="photos-title">Just <em>You</em></h2>
+  <div class="photo-strip" id="photo-strip"></div>
+</section>
+
+<div class="divider">🌹 ✦ 💕</div>
+
 <!-- Footer -->
 <footer>
   <span class="footer-logo">Forever Yours 💕</span>
@@ -720,7 +935,7 @@ function spawnPetal() {
 setInterval(spawnPetal, 900);
 
 // ── FLOATING LOVE WORDS ──────────────────────────
-const words = ['love','adore','always','forever','mine','cherish','sweetheart','beloved','darling','enchanted','smitten','devotion'];
+let words = ['love','adore','always','forever','mine','cherish','sweetheart','beloved','darling','enchanted','smitten','devotion'];
 function spawnWord() {
   const el = document.createElement('div');
   el.className = 'float-word';
@@ -750,7 +965,8 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.card, .tl-item, .promise-item, .fade-in').forEach(el => observer.observe(el));
 
 // ── TYPEWRITER ───────────────────────────────────
-const letterText = `My love, there are sunsets I've watched alone wishing you were beside me, and sunrises where all I could think of was your face. You came into my life and quietly rearranged everything — the way a song does when it finds you at just the right moment. I don't have the perfect words for what you mean to me, but I have this: every day spent loving you feels like the truest thing I've ever done. Thank you for being my person. Thank you for existing in my timeline.`;
+let personName = '';
+let letterText = `My love, there are sunsets I've watched alone wishing you were beside me, and sunrises where all I could think of was your face. You came into my life and quietly rearranged everything — the way a song does when it finds you at just the right moment. I don't have the perfect words for what you mean to me, but I have this: every day spent loving you feels like the truest thing I've ever done. Thank you for being my person. Thank you for existing in my timeline.`;
 
 let ltIdx = 0;
 const tw = document.getElementById('typewriter-text');
@@ -784,7 +1000,9 @@ const emojis = ['💗','💖','💕','💓','❤️','🧡','💛','💚','💙'
 
 bigHeart.addEventListener('click', e => {
   kisses++;
-  heartCount.textContent = `You've sent ${kisses} kiss${kisses === 1 ? '' : 'es'} 💋`;
+  heartCount.textContent = personName
+    ? `You've sent ${kisses} kiss${kisses === 1 ? '' : 'es'} to ${personName} 💋`
+    : `You've sent ${kisses} kiss${kisses === 1 ? '' : 'es'} 💋`;
   for (let i = 0; i < 6; i++) {
     spawnBurst(e.clientX + (Math.random() - 0.5) * 60, e.clientY + (Math.random() - 0.5) * 60);
   }
@@ -849,6 +1067,252 @@ document.querySelectorAll('.mood-cell').forEach(cell => {
     cell.style.background = '';
   });
 });
+
+// ── ONBOARDING ───────────────────────────────────
+(function () {
+  const panel = document.getElementById('onboarding');
+  let obCurrentStep = 1;
+  let obSelectedGender = '';
+  let obUploadedPhotos = [];
+
+  // Onboarding background canvas
+  const obCanvas = document.getElementById('ob-canvas');
+  const obCtx = obCanvas.getContext('2d');
+  function resizeObCanvas() {
+    obCanvas.width  = window.innerWidth;
+    obCanvas.height = window.innerHeight;
+  }
+  resizeObCanvas();
+  window.addEventListener('resize', resizeObCanvas);
+
+  const obStars = Array.from({ length: 110 }, () => ({
+    x: Math.random() * obCanvas.width,
+    y: Math.random() * obCanvas.height,
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(),
+    speed: Math.random() * 0.01 + 0.003,
+    phase: Math.random() * Math.PI * 2
+  }));
+  let obT = 0;
+  function drawObStars() {
+    if (!panel.classList.contains('ob-hidden')) {
+      obCtx.clearRect(0, 0, obCanvas.width, obCanvas.height);
+      obStars.forEach(s => {
+        s.a = 0.2 + 0.6 * Math.sin(s.phase + obT * s.speed);
+        obCtx.beginPath();
+        obCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        obCtx.fillStyle = `rgba(253,246,240,${s.a})`;
+        obCtx.fill();
+      });
+      obT++;
+    }
+    requestAnimationFrame(drawObStars);
+  }
+  requestAnimationFrame(drawObStars);
+
+  function showObStep(n) {
+    document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('ob-active'));
+    document.getElementById('ob-step-' + n).classList.add('ob-active');
+    document.querySelectorAll('.ob-dot').forEach((d, i) => {
+      d.classList.toggle('ob-active', i < n);
+    });
+    obCurrentStep = n;
+  }
+
+  // Step 1 → 2
+  document.getElementById('ob-next-1').addEventListener('click', () => {
+    const name = document.getElementById('ob-name').value.trim();
+    if (!name) { document.getElementById('ob-name').focus(); return; }
+    showObStep(2);
+  });
+  document.getElementById('ob-name').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('ob-next-1').click();
+  });
+
+  // Gender selection
+  document.querySelectorAll('.ob-gender-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ob-gender-btn').forEach(b => b.classList.remove('ob-selected'));
+      btn.classList.add('ob-selected');
+      obSelectedGender = btn.dataset.gender;
+      document.getElementById('ob-next-2').disabled = false;
+    });
+  });
+
+  // Step 2 → 3
+  document.getElementById('ob-next-2').addEventListener('click', () => {
+    if (obSelectedGender) showObStep(3);
+  });
+
+  // Photo upload preview
+  document.getElementById('ob-photos').addEventListener('change', e => {
+    const MAX_SIZE_MB = 10;
+    const files = Array.from(e.target.files)
+      .filter(f => f.type.startsWith('image/') && f.size <= MAX_SIZE_MB * 1024 * 1024)
+      .slice(0, 5);
+    obUploadedPhotos.forEach(url => URL.revokeObjectURL(url));
+    obUploadedPhotos = files.map(f => URL.createObjectURL(f));
+    const preview = document.getElementById('ob-photo-preview');
+    preview.innerHTML = '';
+    obUploadedPhotos.forEach(url => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.className = 'ob-preview-img';
+      img.alt = 'Preview of uploaded photo';
+      preview.appendChild(img);
+    });
+    document.getElementById('ob-upload-text').textContent =
+      files.length === 0 ? 'Click to choose photos'
+      : files.length === 1 ? '1 photo selected'
+      : files.length + ' photos selected';
+  });
+
+  // Enter site
+  document.getElementById('ob-enter').addEventListener('click', () => {
+    const name = document.getElementById('ob-name').value.trim() || 'You';
+    const photosSnapshot = obUploadedPhotos.slice();
+    applyPersonalization(name, obSelectedGender || 'other', photosSnapshot);
+    panel.classList.add('ob-hidden');
+    setTimeout(() => {
+      panel.style.display = 'none';
+      // Revoke preview object URLs — the main site copies are still alive as image src
+    }, 900);
+  });
+}());
+
+// ── PERSONALIZATION ──────────────────────────────
+function escHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+function applyPersonalization(name, gender, photos) {
+  personName = name;
+  const safeName = escHtml(name);
+
+  const content = {
+    female: {
+      extraWords: ['grace', 'radiant', 'enchantress', 'queen', 'luminous', 'dazzling'],
+      card04: {
+        title: 'Your Grace',
+        text: 'The way you carry yourself with such quiet elegance and resilience — watching you is watching someone extraordinary.',
+        back: '"You are stronger and more radiant than you\'ll ever know."'
+      },
+      heroSub: 'Every moment with you is a poem I never want to finish — your grace, your laughter, your light. You are a melody that plays on long after the music stops.',
+      letter: 'My dearest ' + name + ', there are sunsets I\'ve watched alone wishing you were beside me, and sunrises where all I could think of was your face — your smile, your grace, the quiet light you carry everywhere. You came into my life and rearranged everything — the way a song does when it finds you at just the right moment. I don\'t have the perfect words for what you mean to me, but I have this: every day spent loving you feels like the truest thing I\'ve ever done. You are my favourite person, my greatest adventure, my home. Thank you for being my person. Thank you for existing in my timeline.',
+      heartLabel: 'Click to send love to ' + name
+    },
+    male: {
+      extraWords: ['brave', 'steadfast', 'legend', 'king', 'fearless', 'bold'],
+      card04: {
+        title: 'Your Strength',
+        text: 'The way you carry yourself with such steadiness and quiet courage — watching you face the world is watching someone extraordinary.',
+        back: '"You are stronger and braver than you\'ll ever know."'
+      },
+      heroSub: 'Every moment with you is a poem I never want to finish — your courage, your laughter, your warmth. You are a melody that plays on long after the music stops.',
+      letter: 'My dearest ' + name + ', there are sunsets I\'ve watched alone wishing you were beside me, and sunrises where all I could think of was your face — your smile, your laugh, the way you make the whole world feel lighter. You came into my life and rearranged everything — the way a song does when it finds you at just the right moment. I don\'t have the perfect words for what you mean to me, but I have this: every day spent loving you feels like the truest thing I\'ve ever done. You are my favourite person, my greatest adventure, my safe harbour. Thank you for being my person. Thank you for existing in my timeline.',
+      heartLabel: 'Click to send love to ' + name
+    },
+    other: {
+      extraWords: ['unique', 'brilliant', 'wonder', 'star', 'cosmic', 'infinite'],
+      card04: {
+        title: 'Your Spirit',
+        text: 'The way you move through life with such authenticity and light — watching you is watching someone truly extraordinary.',
+        back: '"You are more wonderful than you\'ll ever know."'
+      },
+      heroSub: 'Every moment with you is a poem I never want to finish — your wonder, your laughter, your rare and brilliant light. You are a melody that plays on long after the music stops.',
+      letter: 'My dearest ' + name + ', there are sunsets I\'ve watched alone wishing you were beside me, and sunrises where all I could think of was your face — your smile, your energy, the rare and wonderful light you bring everywhere you go. You came into my life and rearranged everything — the way a song does when it finds you at just the right moment. I don\'t have the perfect words for what you mean to me, but I have this: every day spent loving you feels like the truest thing I\'ve ever done. You are my favourite person, my greatest adventure, my home. Thank you for being my person. Thank you for existing in my timeline.',
+      heartLabel: 'Click to send love to ' + name
+    }
+  };
+
+  const c = content[gender] || content.other;
+
+  // Extend floating words with gender-specific ones
+  words = words.concat(c.extraWords);
+
+  // Nav logo
+  document.querySelector('nav .logo').innerHTML = 'Forever ' + safeName + '\'s 💕';
+
+  // Hero eyebrow
+  document.querySelector('.hero-eyebrow').textContent =
+    'A Reminder That I Love You Always, ' + name + ' 💝';
+
+  // Hero title
+  document.querySelector('.hero-title').innerHTML =
+    'You Are My <span>Everything</span>, ' + safeName;
+
+  // Hero subtitle
+  document.querySelector('.hero-sub').textContent = c.heroSub;
+
+  // Letter section title
+  document.querySelector('#letter .section-title').innerHTML =
+    'A Letter <em>For ' + safeName + '</em>';
+
+  // Update typewriter text and reset it
+  letterText = c.letter;
+  ltIdx = 0;
+  tw.textContent = '';
+  tw.style.borderRight = '2px solid var(--rose)';
+
+  // Card 04 (index 3)
+  const cards = document.querySelectorAll('.card');
+  if (cards[3]) {
+    const front = cards[3].querySelector('.front');
+    const back  = cards[3].querySelector('.back');
+    if (front) {
+      front.querySelector('h3').textContent = c.card04.title;
+      front.querySelector('p').textContent  = c.card04.text;
+    }
+    if (back) {
+      back.querySelector('p').innerHTML =
+        '<span style="color:var(--blush);font-style:italic;">' + c.card04.back + '</span>';
+    }
+  }
+
+  // Heart section label
+  const heartLabel = document.querySelector('#heart-section .section-label');
+  if (heartLabel) heartLabel.textContent = c.heartLabel;
+
+  // Heart counter reset text
+  heartCount.textContent = 'You\'ve sent 0 kisses to ' + name + ' 💋';
+
+  // Footer
+  document.querySelector('.footer-logo').innerHTML = 'Forever ' + safeName + '\'s 💕';
+  document.querySelector('footer p').textContent =
+    'Made with every bit of love I have \u00a0•\u00a0 Just for ' + name;
+
+  // Photos
+  if (photos.length > 0) {
+    // Place photos as backgrounds of mood-cells
+    const moodCells = document.querySelectorAll('.mood-cell');
+    photos.slice(0, moodCells.length).forEach((url, i) => {
+      moodCells[i].style.backgroundImage    = 'url(\'' + url + '\')';
+      moodCells[i].style.backgroundSize     = 'cover';
+      moodCells[i].style.backgroundPosition = 'center';
+      const emoji = moodCells[i].querySelector('span:not(.mood-cell-label)');
+      if (emoji) emoji.style.opacity = '0.25';
+    });
+
+    // Populate photo strip section
+    const photoSection = document.getElementById('photos');
+    const strip = document.getElementById('photo-strip');
+    document.getElementById('photos-title').innerHTML =
+      'Just <em>' + safeName + '</em>';
+    photos.forEach(url => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.className = 'photo-strip-img';
+      img.alt = name;
+      strip.appendChild(img);
+    });
+    photoSection.style.display = 'block';
+  }
+}
 </script>
 </body>
 </html>
